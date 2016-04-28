@@ -65,6 +65,15 @@ def cond(l):
 
 name['cond'] = cond
 
+def _if(l):
+    if l[0] == True:
+        return l[1]
+    elif l[0] == False:
+        return l[2]
+
+name['if'] = _if
+
+
 def add(l):
     print(letd)
     elem=0
