@@ -36,12 +36,39 @@ def cdr(l):
 name['cdr'] = cdr
 
 def let(l):
+    print(l)
     letd[l[0][0]]=l[0][1]
-    key=l[0][0]
-    return key
+    if l[1][0] == '*':
+        print (_mult(l[1]))
+    elif l[1][0] == '/':
+        print (_div(l[1]))
+    elif l[1][0] == '+':
+        print(_add(l[1]))
+    elif l[1][0] == '-':
+        print(_sub(l[1]))
+    letd.clear()
+
+
 
 name['let'] = let
 
+
+def _mult(l):
+    if l[1] in letd.keys():
+        l[1] = letd[l[1]]
+    elif l[2] in letd.keys():
+        l[2] = letd[l[2]]
+    return l[1] * l[2]
+
+def _div(l):
+    if l[1] in letd.keys():
+        l[1] = letd[l[1]]
+    elif l[2] in letd.keys():
+        l[2] = letd[l[2]]
+        if l[2] == 0:
+            return "Error, Division by Zero"
+    l[1] = (l[1])
+    return (l[1] / l[2])
 
 def eq(l):
     return l[0] == l[1]
@@ -74,25 +101,24 @@ def _if(l):
 name['if'] = _if
 
 
-def add(l):
-    print(letd)
-    elem=0
-    if l[0] in letd:
-        elem=letd[l[0]]
-        l[0]=elem
-    elif l[1] in letd:
-        elem=letd[l[1]]
-        l[1]=elem
-    print(elem)
-    return sum(l)
+def _add(l):
+    if l[1] in letd.keys():
+        l[1] = letd[l[1]]
+    elif l[2] in letd.keys():
+        l[2] = letd[l[2]]
+    return (l[1] + l[2])
 
-name['+'] = add
 
 def minus(l):
     '''Unary minus'''
     return -l[0]
 
-name['-'] = minus
+def _sub(l):
+    if l[1] in letd.keys():
+        l[1] = letd[l[1]]
+    elif l[2] in letd.keys():
+        l[2] = letd[l[2]]
+    return (l[1] - l[2])
 
 def _print(l):
     print lisp_str(l[0])
@@ -221,6 +247,7 @@ def p_atom_bool(p):
 def p_atom_num(p):
     'atom : NUM'
     p[0] = p[1]
+
 
 def p_atom_word(p):
     'atom : TEXT'
