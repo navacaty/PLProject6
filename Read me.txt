@@ -1,0 +1,6 @@
+READ ME
+
+Let function supports +,-,/,*
+
+/ function gives the floor of the integer.
+
