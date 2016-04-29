@@ -75,10 +75,10 @@ name['print'] = _print
 #  Evaluation functions
 
 def lisp_eval(simb, items):
-    if simb in name:
-        return call(name[simb], eval_lists(items))
-    else:
-       return [simb] + items
+    # if simb in name:
+    # return call(name[simb], eval_lists(items))
+    # else:
+    return [simb] + items
 
 def call(f, l):
     try:
